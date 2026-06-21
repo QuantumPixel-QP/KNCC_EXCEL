@@ -1,0 +1,89 @@
+/* Core palette */
+:root {
+  --bg-primary: #1E1E2E;        /* Main background */
+  --bg-secondary: #252536;       /* Panel backgrounds */
+  --bg-tertiary: #2D2D44;        /* Card backgrounds */
+  --bg-surface: #333350;         /* Elevated surfaces */
+  
+  --accent-blue: #0696D7;        /* Autodesk blue */
+  --accent-cyan: #00BCD4;        /* Secondary accent */
+  --accent-orange: #FF6B35;      /* Warning/attention */
+  --accent-green: #00C853;       /* Success states */
+  --accent-red: #FF5252;         /* Error/danger */
+  
+  --text-primary: #E8E8F0;       /* Main text */
+  --text-secondary: #9CA3AF;     /* Muted text */
+  --text-tertiary: #6B7280;      /* Disabled text */
+  
+  --glass-bg: rgba(37, 37, 54, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.app-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.page-content {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+}
+
+/* AG Grid Dark Theme Customizations */
+.ag-theme-alpine-dark {
+  --ag-background-color: var(--bg-secondary);
+  --ag-header-background-color: var(--bg-tertiary);
+  --ag-odd-row-background-color: rgba(255, 255, 255, 0.02);
+  --ag-border-color: var(--glass-border);
+  --ag-row-border-color: var(--glass-border);
+  --ag-header-foreground-color: var(--text-secondary);
+  --ag-data-color: var(--text-primary);
+  --ag-row-hover-color: rgba(6, 150, 215, 0.1);
+  --ag-selected-row-background-color: rgba(6, 150, 215, 0.2);
+}
+
+/* Utility classes */
+.btn {
+  background: var(--accent-blue);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.btn:hover {
+  background: #057db3;
+  box-shadow: 0 0 12px rgba(6, 150, 215, 0.4);
+}
