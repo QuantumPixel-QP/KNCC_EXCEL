@@ -7,8 +7,8 @@ on:
     branches: [ "master", "main" ]
 
 env:
-  VERCEL_ORG_ID: team_tH9RWT1FcEtTJMq8jNbXQmbg
-  VERCEL_PROJECT_ID: prj_I5VCt21qTMou4HLelSBr8ShE7ejd
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
 jobs:
   Deploy-Production:
@@ -18,19 +18,19 @@ jobs:
       run:
         working-directory: ./platform/frontend
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20.x
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
       - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=production --token=vcp_8AqnZRPqjJ1SGBUAPcHsKwRZwbRpJSzy4bS6m2hkhX1p4GprOr4aj0Hm
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
       - name: Build Project Artifacts
-        run: vercel build --prod --token=vcp_8AqnZRPqjJ1SGBUAPcHsKwRZwbRpJSzy4bS6m2hkhX1p4GprOr4aj0Hm
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
-        run: vercel deploy --prebuilt --prod --token=vcp_8AqnZRPqjJ1SGBUAPcHsKwRZwbRpJSzy4bS6m2hkhX1p4GprOr4aj0Hm
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
 
   Deploy-Preview:
     runs-on: ubuntu-latest
@@ -39,16 +39,16 @@ jobs:
       run:
         working-directory: ./platform/frontend
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20.x
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
       - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=preview --token=vcp_8AqnZRPqjJ1SGBUAPcHsKwRZwbRpJSzy4bS6m2hkhX1p4GprOr4aj0Hm
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
       - name: Build Project Artifacts
-        run: vercel build --token=vcp_8AqnZRPqjJ1SGBUAPcHsKwRZwbRpJSzy4bS6m2hkhX1p4GprOr4aj0Hm
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
-        run: vercel deploy --prebuilt --token=vcp_8AqnZRPqjJ1SGBUAPcHsKwRZwbRpJSzy4bS6m2hkhX1p4GprOr4aj0Hm
+        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
