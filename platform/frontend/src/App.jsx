@@ -3,6 +3,7 @@ import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 import Sidebar from './components/Sidebar';
 import TopBar from './components/TopBar';
+import LandingPage from './pages/LandingPage';
 import Dashboard from './pages/Dashboard';
 import MaterialGrid from './pages/MaterialGrid';
 import UploadCenter from './pages/UploadCenter';
@@ -38,11 +39,12 @@ function ProtectedLayout() {
 function App() {
   return (
     <Routes>
+      <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       
       <Route element={<ProtectedLayout />}>
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/grid" element={<MaterialGrid />} />
         <Route path="/upload" element={<UploadCenter />} />
         <Route path="/documents" element={<DocumentViewer />} />

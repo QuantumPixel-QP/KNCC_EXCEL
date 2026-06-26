@@ -1,22 +1,18 @@
-/**
- * Sidebar — fixed:
- * FIX #16: Added overflow-y: auto so nav doesn't clip on small screens.
- * FIX #10: Uses activeProject from context instead of hardcoded text.
- */
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { LayoutDashboard, Table, UploadCloud, FileText, Clock, TrendingUp, CheckCircle, FileCheck, Download, Activity } from 'lucide-react';
 
 const NAV_ITEMS = [
-  { to: '/',               icon: '📊', label: 'Dashboard' },
-  { to: '/grid',           icon: '📋', label: 'Material Grid' },
-  { to: '/upload',         icon: '⬆️', label: 'Upload Center' },
-  { to: '/documents',      icon: '📄', label: 'Documents' },
-  { to: '/timeline',       icon: '⏱️', label: 'CO Timeline' },
-  { to: '/progress',       icon: '📈', label: 'Delivery Progress' },
-  { to: '/reconciliation', icon: '✅', label: 'Reconciliation' },
-  { to: '/vpos',           icon: '📑', label: 'VPO Management' },
-  { to: '/export',         icon: '📥', label: 'Excel Export' },
-  { to: '/activity',       icon: '📝', label: 'Activity Log' },
+  { to: '/',               icon: <LayoutDashboard size={18} />, label: 'Workspace' },
+  { to: '/grid',           icon: <Table size={18} />, label: 'Material Grid' },
+  { to: '/upload',         icon: <UploadCloud size={18} />, label: 'Upload Center' },
+  { to: '/documents',      icon: <FileText size={18} />, label: 'Documents' },
+  { to: '/timeline',       icon: <Clock size={18} />, label: 'CO Timeline' },
+  { to: '/progress',       icon: <TrendingUp size={18} />, label: 'Delivery Progress' },
+  { to: '/reconciliation', icon: <CheckCircle size={18} />, label: 'Reconciliation' },
+  { to: '/vpos',           icon: <FileCheck size={18} />, label: 'VPO Management' },
+  { to: '/export',         icon: <Download size={18} />, label: 'Excel Export' },
+  { to: '/activity',       icon: <Activity size={18} />, label: 'Activity Log' },
 ];
 
 const Sidebar = () => {
@@ -24,53 +20,55 @@ const Sidebar = () => {
     <div
       className="glass-panel"
       style={{
-        width: '220px',
+        width: '240px',
         display: 'flex',
         flexDirection: 'column',
-        padding: '16px',
+        padding: '24px 16px',
         borderRight: '1px solid var(--glass-border)',
         flexShrink: 0,
+        background: 'rgba(9, 9, 11, 0.8)',
+        zIndex: 100
       }}
     >
       {/* Logo */}
-      <div style={{ marginBottom: '24px' }}>
-        <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', letterSpacing: '2px', marginBottom: '4px' }}>
-          KNCC
+      <div style={{ marginBottom: '32px', paddingLeft: '8px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ width: '24px', height: '24px', borderRadius: '6px', background: 'linear-gradient(135deg, #8B5CF6, #3B82F6)' }} />
+          <div style={{ fontSize: '18px', fontWeight: 800, color: '#fff', fontFamily: 'Outfit', letterSpacing: '0.05em' }}>
+            QUANTUM
+          </div>
         </div>
-        <div style={{ fontSize: '16px', fontWeight: 700, color: 'var(--accent-blue)' }}>
-          Procurement
+        <div style={{ fontSize: '11px', color: 'var(--accent-cyan)', letterSpacing: '1px', marginTop: '4px', textTransform: 'uppercase', fontWeight: 600 }}>
+          Enterprise Core
         </div>
       </div>
 
-      {/* Nav — FIX #16: overflow-y auto */}
-      <nav style={{ display: 'flex', flexDirection: 'column', gap: '4px', overflowY: 'auto', flex: 1 }}>
+      {/* Nav */}
+      <nav style={{ display: 'flex', flexDirection: 'column', gap: '6px', overflowY: 'auto', flex: 1 }}>
         {NAV_ITEMS.map(item => (
-          <NavLink key={item.to} to={item.to} end={item.to === '/'} style={navStyle}>
-            <span style={{ fontSize: '16px', lineHeight: 1 }}>{item.icon}</span>
-            <span style={{ fontSize: '13px' }}>{item.label}</span>
+          <NavLink key={item.to} to={item.to === '/' ? '/dashboard' : item.to} style={navStyle}>
+            <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'inherit' }}>{item.icon}</span>
+            <span style={{ fontSize: '14px', fontFamily: 'Inter', fontWeight: 500 }}>{item.label}</span>
           </NavLink>
         ))}
       </nav>
-
-      {/* Bottom version tag */}
-      <div style={{ paddingTop: '12px', borderTop: '1px solid var(--glass-border)', fontSize: '11px', color: 'var(--text-tertiary)' }}>
-        v1.0.0 · Autodesk-Style UI
-      </div>
     </div>
   );
 };
 
 const navStyle = ({ isActive }) => ({
-  padding: '9px 12px',
+  padding: '12px 16px',
   textDecoration: 'none',
-  color: isActive ? 'var(--text-primary)' : 'var(--text-secondary)',
-  backgroundColor: isActive ? 'var(--bg-surface)' : 'transparent',
-  borderRadius: '6px',
-  transition: 'all 0.15s',
-  borderLeft: isActive ? '3px solid var(--accent-blue)' : '3px solid transparent',
+  color: isActive ? '#fff' : 'var(--text-secondary)',
+  backgroundColor: isActive ? 'rgba(139, 92, 246, 0.15)' : 'transparent',
+  borderRadius: '12px',
+  transition: 'all 0.2s ease',
+  border: '1px solid',
+  borderColor: isActive ? 'rgba(139, 92, 246, 0.3)' : 'transparent',
   display: 'flex',
   alignItems: 'center',
-  gap: '10px',
+  gap: '12px',
+  boxShadow: isActive ? '0 4px 12px rgba(139, 92, 246, 0.1)' : 'none'
 });
 
 export default Sidebar;
