@@ -29,8 +29,12 @@ export function AuthProvider({ children }) {
   }, [token]);
 
   const login = async (email, password) => {
-    // Hardcoded demo account or whatever is in localStorage
-    const savedUser = JSON.parse(localStorage.getItem('user'));
+    let savedUser = JSON.parse(localStorage.getItem('user'));
+    
+    // If they are logging in as a demo account, but the saved user is different, override it
+    if (email === 'admin@kncc.com' || email === 'engineer@kncc.com') {
+      savedUser = null; 
+    }
     
     if (email === 'admin@kncc.com' || email === 'engineer@kncc.com' || (savedUser && savedUser.email === email)) {
       const mockUser = savedUser || {
@@ -41,6 +45,8 @@ export function AuthProvider({ children }) {
       };
       
       localStorage.setItem('user', JSON.stringify(mockUser));
+      setUser(mockUser);
+      setOrganization({ name: mockUser.organization_name || 'KNCC Demo Org' });
       setToken('mock-jwt-token-12345');
     } else {
       throw new Error('Invalid credentials');
@@ -50,6 +56,8 @@ export function AuthProvider({ children }) {
   const register = async (name, email, password, organization_name) => {
     const newUser = { name, email, role: 'admin', organization_name };
     localStorage.setItem('user', JSON.stringify(newUser));
+    setUser(newUser);
+    setOrganization({ name: organization_name });
     setToken('mock-jwt-token-12345');
   };
 
