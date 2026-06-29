@@ -8,7 +8,11 @@ PLATFORM_DIR = os.path.dirname(BASE_DIR)
 PROJECT_ROOT = os.path.dirname(PLATFORM_DIR)
 
 # Database
-DB_PATH = os.path.join(BASE_DIR, "kncc_platform.db")
+if os.environ.get("VERCEL") == "1":
+    DB_PATH = "/tmp/kncc_platform.db"
+else:
+    DB_PATH = os.path.join(BASE_DIR, "kncc_platform.db")
+    
 DATABASE_URL = os.environ.get("DATABASE_URL", f"sqlite:///{DB_PATH}")
 
 # Upload storage
