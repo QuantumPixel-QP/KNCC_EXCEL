@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import logo from '../assets/logo.png';
 import './Auth.css';
 
 export default function Login() {
@@ -25,8 +24,10 @@ export default function Login() {
     <div className="auth-container">
       <div className="auth-card">
         <div className="auth-header">
-          <img src={logo} alt="KNCC Logo" style={{ width: '64px', height: '64px', marginBottom: '1rem', borderRadius: '12px', objectFit: 'contain' }} />
-          <h1 className="auth-title">KNCC EXCEL</h1>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+            <div style={{ width: '32px', height: '32px', borderRadius: '4px', background: 'linear-gradient(135deg, #F59E0B, #3B82F6)' }} />
+            <span style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 800, fontSize: '1.5rem', letterSpacing: '0.05em', color: '#fff' }}>KNCC EXCEL</span>
+          </div>
           <p className="auth-subtitle">Sign in to your organization</p>
         </div>
         {error && <div className="auth-error">{error}</div>}
