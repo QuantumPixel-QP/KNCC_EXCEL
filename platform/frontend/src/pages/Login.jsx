@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import logo from '../assets/logo.png';
 import './Auth.css';
 
 export default function Login() {
@@ -24,7 +25,8 @@ export default function Login() {
     <div className="auth-container">
       <div className="auth-card">
         <div className="auth-header">
-          <h1 className="auth-title">KNCC</h1>
+          <img src={logo} alt="KNCC Logo" style={{ width: '64px', height: '64px', marginBottom: '1rem', borderRadius: '12px', objectFit: 'contain' }} />
+          <h1 className="auth-title">KNCC EXCEL</h1>
           <p className="auth-subtitle">Sign in to your organization</p>
         </div>
         {error && <div className="auth-error">{error}</div>}
@@ -51,27 +53,6 @@ export default function Login() {
           </div>
           <button type="submit" className="auth-button">Sign In</button>
         </form>
-        <div style={{ marginTop: '1.5rem', display: 'flex', gap: '0.5rem', flexDirection: 'column' }}>
-          <div style={{ fontSize: '0.8rem', color: '#a1a1aa', textAlign: 'center', marginBottom: '0.2rem' }}>Demo Accounts</div>
-          <button 
-            type="button" 
-            onClick={() => { setEmail('admin@kncc.com'); setPassword('password123'); }}
-            style={{ padding: '0.75rem', background: 'rgba(245, 158, 11, 0.1)', border: '1px solid rgba(245, 158, 11, 0.2)', color: '#F59E0B', borderRadius: '6px', cursor: 'pointer', fontFamily: 'Inter', fontSize: '0.9rem', fontWeight: 500, transition: 'all 0.2s' }}
-            onMouseOver={(e) => { e.currentTarget.style.background = 'rgba(245, 158, 11, 0.2)' }}
-            onMouseOut={(e) => { e.currentTarget.style.background = 'rgba(245, 158, 11, 0.1)' }}
-          >
-            Load Admin Credentials
-          </button>
-          <button 
-            type="button" 
-            onClick={() => { setEmail('engineer@kncc.com'); setPassword('password123'); }}
-            style={{ padding: '0.75rem', background: 'rgba(59, 130, 246, 0.1)', border: '1px solid rgba(59, 130, 246, 0.2)', color: '#3B82F6', borderRadius: '6px', cursor: 'pointer', fontFamily: 'Inter', fontSize: '0.9rem', fontWeight: 500, transition: 'all 0.2s' }}
-            onMouseOver={(e) => { e.currentTarget.style.background = 'rgba(59, 130, 246, 0.2)' }}
-            onMouseOut={(e) => { e.currentTarget.style.background = 'rgba(59, 130, 246, 0.1)' }}
-          >
-            Load Engineer Credentials
-          </button>
-        </div>
         <div className="auth-footer">
           Don't have an account? <Link to="/register">Request access</Link>
         </div>

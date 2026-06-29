@@ -4,6 +4,7 @@ import { OrbitControls, Box, Stars } from '@react-three/drei';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { BarChart, Activity, Cpu, ChevronDown, ArrowRight } from 'lucide-react';
+import logo from '../assets/logo.png';
 import './LandingPage.css';
 
 const AnimatedScaffolding = () => {
@@ -105,7 +106,7 @@ export default function LandingPage() {
             transition={{ duration: 0.8 }}
             className="nav-logo"
           >
-            <div className="nav-logo-icon" />
+            <img src={logo} alt="KNCC Logo" style={{ width: '36px', height: '36px', borderRadius: '6px', objectFit: 'contain' }} />
             <span className="nav-logo-text">KNCC EXCEL</span>
           </motion.div>
           <motion.button
