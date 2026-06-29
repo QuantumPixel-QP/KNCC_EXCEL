@@ -16,7 +16,7 @@ export default function Register() {
     e.preventDefault();
     try {
       await register(name, email, password, orgName);
-      navigate('/');
+      navigate('/dashboard');
     } catch (err) {
       setError('Failed to create account. Email might be in use.');
     }
