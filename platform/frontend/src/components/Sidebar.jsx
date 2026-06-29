@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { LayoutDashboard, Table, UploadCloud, FileText, Clock, TrendingUp, CheckCircle, FileCheck, Download, Activity } from 'lucide-react';
+import logo from '../assets/logo.png';
 
 const NAV_ITEMS = [
   { to: '/',               icon: <LayoutDashboard size={18} />, label: 'Workspace' },
@@ -31,15 +32,15 @@ const Sidebar = () => {
       }}
     >
       {/* Logo */}
-      <div style={{ marginBottom: '32px', paddingLeft: '8px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <div style={{ width: '24px', height: '24px', borderRadius: '6px', background: 'linear-gradient(135deg, #8B5CF6, #3B82F6)' }} />
+      <div style={{ marginBottom: '32px', paddingLeft: '8px', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        <img src={logo} alt="KNCC Logo" style={{ width: '32px', height: '32px', borderRadius: '4px', objectFit: 'contain' }} />
+        <div>
           <div style={{ fontSize: '18px', fontWeight: 800, color: '#fff', fontFamily: 'Outfit', letterSpacing: '0.05em' }}>
-            QUANTUM
+            KNCC
           </div>
-        </div>
-        <div style={{ fontSize: '11px', color: 'var(--accent-cyan)', letterSpacing: '1px', marginTop: '4px', textTransform: 'uppercase', fontWeight: 600 }}>
-          Enterprise Core
+          <div style={{ fontSize: '11px', color: 'var(--accent-cyan)', letterSpacing: '1px', textTransform: 'uppercase', fontWeight: 600 }}>
+            Enterprise
+          </div>
         </div>
       </div>
 
@@ -52,6 +53,13 @@ const Sidebar = () => {
           </NavLink>
         ))}
       </nav>
+
+      {/* Quantum Pixel Footer */}
+      <div style={{ marginTop: 'auto', paddingTop: '16px', borderTop: '1px solid rgba(255,255,255,0.05)', textAlign: 'center' }}>
+        <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '1px' }}>
+          A Quantum Pixel Product
+        </div>
+      </div>
     </div>
   );
 };

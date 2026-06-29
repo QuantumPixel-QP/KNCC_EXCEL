@@ -15,9 +15,18 @@ export default function Login() {
     e.preventDefault();
     try {
       await login(email, password);
-      navigate('/');
+      navigate('/dashboard');
     } catch (err) {
       setError('Invalid credentials. Please try again.');
+    }
+  };
+
+  const handleDemoLogin = async (demoEmail) => {
+    try {
+      await login(demoEmail, 'password123');
+      navigate('/dashboard');
+    } catch (err) {
+      setError('Demo login failed.');
     }
   };
 
@@ -31,6 +40,16 @@ export default function Login() {
           </div>
           <p className="auth-subtitle">Sign in to your organization</p>
         </div>
+        
+        <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem' }}>
+          <button type="button" onClick={() => handleDemoLogin('admin@kncc.com')} style={{ flex: 1, padding: '0.5rem', background: 'rgba(59, 130, 246, 0.1)', color: '#3B82F6', border: '1px solid rgba(59, 130, 246, 0.2)', borderRadius: '6px', cursor: 'pointer', fontSize: '0.85rem' }}>
+            Demo Admin
+          </button>
+          <button type="button" onClick={() => handleDemoLogin('engineer@kncc.com')} style={{ flex: 1, padding: '0.5rem', background: 'rgba(16, 185, 129, 0.1)', color: '#10B981', border: '1px solid rgba(16, 185, 129, 0.2)', borderRadius: '6px', cursor: 'pointer', fontSize: '0.85rem' }}>
+            Demo Engineer
+          </button>
+        </div>
+
         {error && <div className="auth-error">{error}</div>}
         <form onSubmit={handleSubmit} className="auth-form">
           <div className="form-group">

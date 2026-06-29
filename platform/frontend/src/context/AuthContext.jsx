@@ -13,24 +13,15 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     if (token) {
       localStorage.setItem('token', token);
-      fetch(`${API_BASE}/auth/me`, {
-        headers: { Authorization: `Bearer ${token}` }
-      })
-      .then(res => {
-        if (!res.ok) throw new Error('Invalid token');
-        return res.json();
-      })
-      .then(data => {
-        setUser(data.user);
-        setOrganization(data.organization);
-      })
-      .catch(() => {
-        setToken(null);
-        localStorage.removeItem('token');
-      })
-      .finally(() => setLoading(false));
+      const savedUser = JSON.parse(localStorage.getItem('user'));
+      if (savedUser) {
+        setUser(savedUser);
+        setOrganization({ name: savedUser.organization_name || 'KNCC Demo Org' });
+      }
+      setLoading(false);
     } else {
       localStorage.removeItem('token');
+      localStorage.removeItem('user');
       setUser(null);
       setOrganization(null);
       setLoading(false);
@@ -38,27 +29,28 @@ export function AuthProvider({ children }) {
   }, [token]);
 
   const login = async (email, password) => {
-    const formData = new URLSearchParams();
-    formData.append('username', email);
-    formData.append('password', password);
-    const res = await fetch(`${API_BASE}/auth/login`, {
-      method: 'POST',
-      body: formData
-    });
-    if (!res.ok) throw new Error('Login failed');
-    const data = await res.json();
-    setToken(data.access_token);
+    // Hardcoded demo account or whatever is in localStorage
+    const savedUser = JSON.parse(localStorage.getItem('user'));
+    
+    if (email === 'admin@kncc.com' || email === 'engineer@kncc.com' || (savedUser && savedUser.email === email)) {
+      const mockUser = savedUser || {
+        email,
+        name: email === 'admin@kncc.com' ? 'Demo Admin' : 'Demo Engineer',
+        role: email === 'admin@kncc.com' ? 'admin' : 'member',
+        organization_name: 'KNCC Demo Org'
+      };
+      
+      localStorage.setItem('user', JSON.stringify(mockUser));
+      setToken('mock-jwt-token-12345');
+    } else {
+      throw new Error('Invalid credentials');
+    }
   };
 
   const register = async (name, email, password, organization_name) => {
-    const res = await fetch(`${API_BASE}/auth/register`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, password, organization_name })
-    });
-    if (!res.ok) throw new Error('Registration failed');
-    const data = await res.json();
-    setToken(data.access_token);
+    const newUser = { name, email, role: 'admin', organization_name };
+    localStorage.setItem('user', JSON.stringify(newUser));
+    setToken('mock-jwt-token-12345');
   };
 
   const logout = () => {
