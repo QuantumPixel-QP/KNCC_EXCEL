@@ -54,10 +54,10 @@ const TopBar = () => {
         {/* Project Metadata */}
         {activeProject && (
           <div style={{ display: 'flex', gap: '16px' }}>
-            <span style={{ fontSize: '12px', color: 'var(--text-tertiary)', background: 'rgba(139, 92, 246, 0.1)', padding: '4px 10px', borderRadius: '20px', color: '#A78BFA' }}>
+            <span style={{ fontSize: '12px', background: 'rgba(139, 92, 246, 0.1)', padding: '4px 10px', borderRadius: '20px', color: '#A78BFA' }}>
               Job ID: {activeProject.job_number}
             </span>
-            <span style={{ fontSize: '12px', color: 'var(--text-tertiary)', background: 'rgba(6, 182, 212, 0.1)', padding: '4px 10px', borderRadius: '20px', color: '#67e8f9' }}>
+            <span style={{ fontSize: '12px', background: 'rgba(6, 182, 212, 0.1)', padding: '4px 10px', borderRadius: '20px', color: '#67e8f9' }}>
               Tax Rate: {((activeProject.tax_rate - 1) * 100).toFixed(0)}%
             </span>
           </div>
