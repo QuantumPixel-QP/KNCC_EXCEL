@@ -16,7 +16,7 @@ jobs:
     if: github.event_name == 'push'
     defaults:
       run:
-        working-directory: ./platform/frontend
+        working-directory: .
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js
@@ -37,7 +37,7 @@ jobs:
     if: github.event_name == 'pull_request'
     defaults:
       run:
-        working-directory: ./platform/frontend
+        working-directory: .
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js

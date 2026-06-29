@@ -8,10 +8,12 @@ export function AuthProvider({ children }) {
   const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [loading, setLoading] = useState(true);
 
+  const API_BASE = import.meta.env.VITE_API_URL || '/api';
+
   useEffect(() => {
     if (token) {
       localStorage.setItem('token', token);
-      fetch('http://localhost:8000/api/auth/me', {
+      fetch(`${API_BASE}/auth/me`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(res => {
@@ -39,7 +41,7 @@ export function AuthProvider({ children }) {
     const formData = new URLSearchParams();
     formData.append('username', email);
     formData.append('password', password);
-    const res = await fetch('http://localhost:8000/api/auth/login', {
+    const res = await fetch(`${API_BASE}/auth/login`, {
       method: 'POST',
       body: formData
     });
@@ -49,7 +51,7 @@ export function AuthProvider({ children }) {
   };
 
   const register = async (name, email, password, organization_name) => {
-    const res = await fetch('http://localhost:8000/api/auth/register', {
+    const res = await fetch(`${API_BASE}/auth/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, email, password, organization_name })

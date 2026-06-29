@@ -11,10 +11,12 @@ export function ProjectProvider({ children }) {
   const [error, setError] = useState(null);
   const { token } = useAuth();
 
+  const API_BASE = import.meta.env.VITE_API_URL || '/api';
+
   useEffect(() => {
     if (!token) return;
     
-    apiFetch('http://localhost:8000/api/projects/')
+    apiFetch(`${API_BASE}/projects/`)
       .then(res => {
         if (!res.ok) throw new Error(`API error ${res.status}`);
         return res.json();

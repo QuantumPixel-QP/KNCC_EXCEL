@@ -12,11 +12,14 @@ DB_PATH = os.path.join(BASE_DIR, "kncc_platform.db")
 DATABASE_URL = os.environ.get("DATABASE_URL", f"sqlite:///{DB_PATH}")
 
 # Upload storage
-UPLOAD_DIR = os.path.join(BASE_DIR, "uploads")
-os.makedirs(UPLOAD_DIR, exist_ok=True)
+if os.environ.get("VERCEL") == "1":
+    UPLOAD_DIR = "/tmp/uploads"
+    EXPORT_DIR = "/tmp/exports"
+else:
+    UPLOAD_DIR = os.path.join(BASE_DIR, "uploads")
+    EXPORT_DIR = os.path.join(BASE_DIR, "exports")
 
-# Excel output
-EXPORT_DIR = os.path.join(BASE_DIR, "exports")
+os.makedirs(UPLOAD_DIR, exist_ok=True)
 os.makedirs(EXPORT_DIR, exist_ok=True)
 
 # Legacy data paths (for importing existing data)
