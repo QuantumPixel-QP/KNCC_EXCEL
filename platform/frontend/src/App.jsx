@@ -4,6 +4,7 @@ import { useAuth } from './context/AuthContext';
 import Sidebar from './components/Sidebar';
 import TopBar from './components/TopBar';
 import LandingPage from './pages/LandingPage';
+import ProductPage from './pages/ProductPage';
 import Dashboard from './pages/Dashboard';
 import MaterialGrid from './pages/MaterialGrid';
 import UploadCenter from './pages/UploadCenter';
@@ -40,6 +41,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
+      <Route path="/product" element={<ProductPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       

@@ -154,6 +154,7 @@ export default function LandingPage() {
               
               <button
                 className="btn-secondary"
+                onClick={() => navigate('/product')}
               >
                 Explore Features
               </button>
