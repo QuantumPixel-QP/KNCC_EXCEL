@@ -7,8 +7,8 @@ on:
     branches: [ "master", "main" ]
 
 env:
-  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  VERCEL_ORG_ID: team_tH9RWT1FcEtTJMq8jNbXQmbg
+  VERCEL_PROJECT_ID: prj_I5VCt21qTMou4HLelSBr8ShE7ejd
 
 jobs:
   pipeline:
